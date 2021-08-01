@@ -1,7 +1,6 @@
 const express = require("express");
 const qinu = require("qinu");
 const redis = require("redis");
-const client = redis.createClient();
 const cors = require("cors");
 require("dotenv").config();
 
@@ -11,6 +10,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
+const client = redis.createClient({
+  host: process.env.REDIS_HOSTNAME,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASSWORD,
+});
 client.on("error", function (error) {
   console.error(error);
 });
