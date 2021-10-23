@@ -22,6 +22,10 @@ client.on("connect", () => {
   console.log("connection to redis db established");
 });
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "server is up" });
+});
+
 app.get("/:id", (req, res) => {
   client.get(req.params.id, (err, reply) => {
     if (err) {
