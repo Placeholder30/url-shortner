@@ -27,13 +27,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:id", (req, res) => {
-  client.get(req.params.id, (err, reply) => {
+  client.get(req.params.id, (err, match) => {
     if (err) {
       res.json({
         message: "there was an error prcessing your request, please try again",
       });
     } else {
-      res.redirect(301, reply);
+      res.redirect(301, match);
     }
   });
 });
@@ -43,7 +43,7 @@ app.post("/", (req, res) => {
   const randomString = qinu({
     length: 6,
   });
-  client.set(randomString, longUrl, (err, reply) => {
+  client.set(randomString, longUrl, (err, response) => {
     if (err) {
       res.status(400).json({
         message:
